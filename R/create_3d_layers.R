@@ -23,6 +23,7 @@
 #' @param surfacecolor_ci A color recognized by plotly. Used within
 #'        the colorscale parameter in add_trace. Defaults to 'grey'.
 #' @param opacity Sets the opacity of the surface. Defaults to 0.5.
+#' @param showlegend whether to show legends for model layers
 #' @inheritParams plotly::plot_ly
 #'
 #' @return A plotly object with the regression surface added to the plot.
@@ -38,7 +39,9 @@
 #' add_3d_surface(p1, model = mymodel, data = hair_data)
 add_3d_surface <- function(p, model, data = NULL, ci = TRUE,
                            surfacecolor = "blue", surfacecolor_ci = "grey",
-                           opacity = 0.5, ...){
+                           opacity = 0.5,
+                           showlegend = FALSE,
+                           ...){
   data <- data %||% plotly::plotly_data(p, id = names(p$x$visdat)[1])
   coefficients <- create_named_coeffs(model= model)
   #could pass coefficients through surface_data, but keeping it here makes the function more flexible
@@ -53,6 +56,7 @@ add_3d_surface <- function(p, model, data = NULL, ci = TRUE,
                       colorscale = list(c(0,surfacecolor),
                                         c(1, surfacecolor)),
                       opacity = opacity, showscale = FALSE,
+                      showlegend = showlegend,
                       legendgroup = 'regression.surface',
                       name = "Predicted regression surface")
   if(ci){
@@ -66,7 +70,7 @@ add_3d_surface <- function(p, model, data = NULL, ci = TRUE,
                         colorscale = list(c(0,surfacecolor_ci),
                                           c(1, surfacecolor_ci)),
                         opacity = opacity, showscale = FALSE,
-                        legendgroup = 'regression.surface', showlegend = FALSE,
+                        legendgroup = 'regression.surface', showlegend = showlegend,
                         name = "Lower 95% CI") %>%
       plotly::add_trace(data = surface_data,
                         x = surface_data[,coefficients["x1"]],
@@ -77,7 +81,7 @@ add_3d_surface <- function(p, model, data = NULL, ci = TRUE,
                         colorscale = list(c(0,surfacecolor_ci),  # color = doesn't work
                                           c(1, surfacecolor_ci)),
                         opacity = opacity, showscale = FALSE,
-                        legendgroup = 'regression.surface', showlegend = FALSE,
+                        legendgroup = 'regression.surface', showlegend = showlegend,
                         name = "Upper 95% CI")
   }
   p

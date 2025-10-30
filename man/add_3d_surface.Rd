@@ -12,6 +12,7 @@ add_3d_surface(
   surfacecolor = "blue",
   surfacecolor_ci = "grey",
   opacity = 0.5,
+  showlegend = FALSE,
   ...
 )
 }
@@ -33,6 +34,8 @@ colorscale parameter in add_trace. Defaults to 'blue'.}
 the colorscale parameter in add_trace. Defaults to 'grey'.}
 
 \item{opacity}{Sets the opacity of the surface. Defaults to 0.5.}
+
+\item{showlegend}{whether to show legends for model layers}
 
 \item{...}{Arguments (i.e., attributes) passed along to the trace \code{type}.
 See \code{\link[plotly:schema]{schema()}} for a list of acceptable attributes for a given trace \code{type}
