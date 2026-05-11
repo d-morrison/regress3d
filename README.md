@@ -52,14 +52,8 @@ effects are depicted.
 
 ## Installation
 
-- Install **regress3d** from **CRAN**:
-
-``` r
-install.packages("regress3d")
-```
-
-- Install latest development version from **GitHub** (requires
-  [devtools](https://github.com/hadley/devtools) package):
+Install the development version from **GitHub** (requires
+[devtools](https://github.com/hadley/devtools) package):
 
 ``` r
 if (!require("devtools")) {
